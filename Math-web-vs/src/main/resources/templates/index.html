@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <title>🧮 Mathematical Assistant Hyper-Pro Edition</title>
 
-    <!-- ✨ Fonts -->
+   
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
-      /* 🌈 Global Styles */
+    
       :root {
         --bg-light: radial-gradient(circle at top left, #e0f2fe, #f8fafc, #dbeafe);
         --bg-dark: radial-gradient(circle at bottom right, #0f172a, #1e293b, #0a0e1a);
@@ -44,7 +44,7 @@
         color: var(--text-dark);
       }
 
-      /* 🌌 Subtle floating particles */
+   
       .bg-particles {
         position: fixed;
         inset: 0;
@@ -73,7 +73,7 @@
         animation: fadeIn 1.5s ease;
       }
       body.dark h1 {
-      color: #1e293b !important; /* Keeps same light-mode color */
+      color: #1e293b !important; 
     }
 
 
@@ -82,7 +82,7 @@
         to { opacity: 1; transform: translateY(0); }
       }
 
-      /* 🌟 Card Design */
+    
       .card {
         background: var(--card-light);
         border-radius: 28px;
@@ -138,7 +138,7 @@
         letter-spacing: 0.4px;
       }
 
-      /* 🧩 Inputs and Labels */
+    
       label {
         font-weight: 500;
         margin-right: 8px;
@@ -154,7 +154,7 @@
         transition: all 0.25s ease;
       }
 
-      /* layout helpers for calculator */
+     
       .inputs-row {
         display: flex;
         gap: 12px;
@@ -180,7 +180,7 @@
         outline: none;
       }
 
-      /* 🔘 Buttons */
+      
       button {
         background: linear-gradient(90deg, var(--accent-blue), #1d4ed8);
         color: white;
@@ -218,7 +218,7 @@
         box-shadow: 0 8px 25px rgba(37,99,235,0.5);
       }
 
-      /* 🌙 Dark mode toggle */
+    
       #themeToggle {
         position: fixed;
         top: 25px;
@@ -240,7 +240,7 @@
         box-shadow: 0 8px 25px rgba(37,99,235,0.4);
       }
 
-      /* 📊 Result */
+      
       #res {
         font-weight: 600;
         color: var(--accent-green);
@@ -249,7 +249,7 @@
         transition: color 0.3s ease;
       }
 
-      /* 🌐 Footer */
+      
       footer {
         text-align: center;
         margin-top: 20px;
@@ -278,10 +278,10 @@
       <div class="particle" style="bottom:10%; right:10%; width:20px; height:20px; animation-delay:3s;"></div>
     </div>
 
-    <!-- 🌗 Dark Mode Toggle -->
+   
     <div id="themeToggle">🌙 Dark Mode</div>
 
-    <!-- 🔢 Calculator -->
+   
     <div class="main">
       <div class="card calc-card">
         <h1>Mathematical Assistant Pro+</h1>
@@ -316,12 +316,12 @@
     <footer>⚡ Designed by <span>Anbuganesh</span></footer>
 
     <script>
-      // 🧠 Basic Calculator
+     
       document.getElementById('calc').addEventListener('click', async () => {
         const a = document.getElementById('a').value;
         const b = document.getElementById('b').value;
         const op = document.getElementById('op').value;
-        // if Fibonacci selected, go to fibonacci page
+        
         if (op === 'fibonacci') {
           window.location.href = '/fibonacci-page';
           return;
@@ -338,17 +338,16 @@
         resultSpan.animate([{ opacity: 0.5 }, { opacity: 1 }], { duration: 300 });
       });
 
-      // If user selects Fibonacci from the op dropdown, navigate to the Fibonacci page
+      
       const opSelect = document.getElementById('op');
       opSelect.addEventListener('change', (e) => {
         if (e.target.value === 'fibonacci') {
-          // navigate immediately when Fibonacci is selected
+          
           window.location.href = '/fibonacci-page';
         }
       });
 
-      // 🧠 Basic Calculator
-      // 🌙 Dark / Light Mode Toggle
+    
       const toggle = document.getElementById('themeToggle');
       const body = document.body;
       toggle.addEventListener('click', () => {
@@ -358,3 +357,4 @@
     </script>
   </body>
 </html>
+
