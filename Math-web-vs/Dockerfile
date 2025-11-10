@@ -1,24 +1,26 @@
-# Use official OpenJDK image as the base image
-FROM openjdk:17-jdk-slim
-
-# Set working directory in container
+# Multi-stage Dockerfile for building and running the Spring Boot app
+# Build stage: use Maven to produce the fat jar
+FROM maven:3.8.8-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Copy the Maven configuration file
+# Copy project files
 COPY pom.xml .
-
-# Copy the source code
 COPY src ./src
 
-# Copy Maven wrapper files if you have them
-COPY mvnw .
-COPY .mvn .mvn
+# Build the jar (skip tests for faster build in CI/containers)
+RUN mvn -DskipTests -B package
 
-# Build the application
-RUN ./mvnw package -DskipTests
+# Runtime stage: smaller JRE image
+FROM eclipse-temurin:17-jre
+WORKDIR /app
 
-# Expose the port your app runs on
-EXPOSE 8080
+# Copy the fat jar produced by the builder stage. Using a wildcard makes this
+# resilient to minor changes in the final artifact name.
+COPY --from=builder /app/target/*.jar app.jar
 
-# Run the application
-CMD ["java", "-jar", "target/MathAssistant.jar"]
+# Default PORT environment variable used by Render. Render will override $PORT.
+ENV PORT=10000
+EXPOSE 10000
+
+# Start the Spring Boot application and bind it to the provided port
+CMD ["sh", "-c", "java -Dserver.port=${PORT:-10000} -jar /app/app.jar"]
