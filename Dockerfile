@@ -1,26 +1,27 @@
 # Multi-stage Dockerfile for building and running the Spring Boot app
-# Build stage: use Maven to produce the fat jar
+
+# --- Build stage ---
 FROM maven:3.8.8-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Copy project files
-COPY pom.xml .
-COPY src ./src
+# Copy project files from the subfolder Math-web-vs
+COPY Math-web-vs/pom.xml .
+COPY Math-web-vs/src ./src
 
-# Build the jar (skip tests for faster build in CI/containers)
+# Build the JAR (skip tests)
 RUN mvn -DskipTests -B package
 
-# Runtime stage: smaller JRE image
+
+# --- Runtime stage ---
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 
-# Copy the fat jar produced by the builder stage. Using a wildcard makes this
-# resilient to minor changes in the final artifact name.
+# Copy the JAR from the builder stage
 COPY --from=builder /app/target/*.jar app.jar
 
-# Default PORT environment variable used by Render. Render will override $PORT.
+# Default Render port
 ENV PORT=10000
 EXPOSE 10000
 
-# Start the Spring Boot application and bind it to the provided port
+# Start the Spring Boot app
 CMD ["sh", "-c", "java -Dserver.port=${PORT:-10000} -jar /app/app.jar"]
