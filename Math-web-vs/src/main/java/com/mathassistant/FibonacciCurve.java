@@ -9,33 +9,33 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 public class FibonacciCurve {
-    private static final int PADDING = 12; // smaller margin so grid can be larger
+    private static final int PADDING = 12; 
 
-    // Default generator (keeps compatibility)
+
     public byte[] generateCurve() throws IOException {
         return generateCurve(10, 800);
     }
 
-    // Parameterized generator: number of Fibonacci terms to draw (1..1000) and size px
+   
     public byte[] generateCurve(int terms, int size) throws IOException {
         if (terms < 1) terms = 1;
-        // Allow up to 1000 terms -- backend cap to match frontend (frontend input max=1000)
+    
         if (terms > 1000) terms = 1000;
 
         int width = Math.max(100, Math.min(size, 2000));
-        int height = width * 3 / 4; // keep a pleasant aspect ratio (3:4) — adjust as needed
+        int height = width * 3 / 4; 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = image.createGraphics();
         try {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-            // white background
+           
             g.setColor(Color.WHITE);
             g.fillRect(0, 0, width, height);
 
-            // Make the grid/axes box larger and symmetric, centered at (0,0)
+          
             double aspect = (double)(width - 2 * PADDING) / (height - 2 * PADDING);
-            double boxHalfHeight = 13.0; // larger vertical size
+            double boxHalfHeight = 13.0; 
             double boxHalfWidth = boxHalfHeight * aspect;
             double xMin = -boxHalfWidth, xMax = boxHalfWidth;
             double yMin = -boxHalfHeight, yMax = boxHalfHeight;
@@ -45,7 +45,7 @@ public class FibonacciCurve {
 
             final int pad = PADDING;
 
-            // draw grid (light)
+        
             g.setColor(new Color(230, 230, 230));
             g.setStroke(new BasicStroke(1));
             for (double xv = xMin; xv <= xMax + 0.001; xv += 2.0) {
@@ -57,14 +57,14 @@ public class FibonacciCurve {
                 g.drawLine(pad, sy, width - pad, sy);
             }
 
-            // axes (thicker) with arrowheads and labels
+        
             g.setColor(Color.BLACK);
             g.setStroke(new BasicStroke(2.0f));
             int arrowSize = 10;
             if (yMin <= 0 && yMax >= 0) {
                 int sy0 = (int)Math.round(height - pad - (0 - yMin) * yScale);
                 g.drawLine(pad, sy0, width - pad, sy0);
-                // small arrow at +x end
+               
                 Path2D.Double axArrow = new Path2D.Double();
                 int ax = width - pad;
                 int ay = sy0;
@@ -73,14 +73,14 @@ public class FibonacciCurve {
                 axArrow.lineTo(ax - arrowSize, ay + arrowSize/2);
                 axArrow.closePath();
                 g.fill(axArrow);
-                // x label
+                
                 g.setFont(new Font("Arial", Font.BOLD, 14));
                 g.drawString("x", ax - 16, ay - 8);
             }
             if (xMin <= 0 && xMax >= 0) {
                 int sx0 = (int)Math.round(pad + (0 - xMin) * xScale);
                 g.drawLine(sx0, pad, sx0, height - pad);
-                // small arrow at +y end (top)
+           
                 Path2D.Double ayArrow = new Path2D.Double();
                 int ax = sx0;
                 int ay = pad;
@@ -89,7 +89,7 @@ public class FibonacciCurve {
                 ayArrow.lineTo(ax + arrowSize/2, ay + arrowSize);
                 ayArrow.closePath();
                 g.fill(ayArrow);
-                // y label
+                
                 g.setFont(new Font("Arial", Font.BOLD, 14));
                 g.drawString("y", ax + 8, ay + 18);
             }
@@ -117,7 +117,7 @@ public class FibonacciCurve {
                 g.drawString(lbl, sxLeft, sy + fm.getAscent()/2 - 2);
             }
 
-            // legend
+            
             String legendText = "Fibonacci spiral";
             g.setFont(new Font("Arial", Font.PLAIN, 12));
             FontMetrics legendFm = g.getFontMetrics();
@@ -134,7 +134,7 @@ public class FibonacciCurve {
             g.fillRoundRect(rectX, rectY, rectW, rectH, 6, 6);
             g.setColor(Color.BLACK);
             g.drawRoundRect(rectX, rectY, rectW, rectH, 6, 6);
-            // draw legend line using green to match requested spiral color
+      
             g.setColor(new Color(13,148,136));
             g.setStroke(new BasicStroke(2.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
             int ly = rectY + rectH/2;
@@ -146,7 +146,7 @@ public class FibonacciCurve {
             int ty = rectY + paddingY + legendFm.getAscent();
             g.drawString(legendText, tx, ty);
 
-            // Build Fibonacci numbers
+           
             ArrayList<Integer> fib = new ArrayList<>();
             fib.add(1);
             if (terms > 1) fib.add(1);
@@ -154,7 +154,7 @@ public class FibonacciCurve {
                 fib.add(fib.get(i-1) + fib.get(i-2));
             }
 
-            // Spiral parameters
+          
             double phi = (1.0 + Math.sqrt(5.0)) / 2.0;
             double b = 2.0 * Math.log(phi) / Math.PI;
             double thetaMax = terms * Math.PI / 2.0;
@@ -169,7 +169,7 @@ public class FibonacciCurve {
             double cx = pad + (0 - xMin) * xScale;
             double cy = height - pad - (0 - yMin) * yScale;
 
-            // draw spiral in green
+        
             g.setColor(new Color(13,148,136));
             g.setStroke(new BasicStroke(3.0f));
             Path2D.Double path = new Path2D.Double();
