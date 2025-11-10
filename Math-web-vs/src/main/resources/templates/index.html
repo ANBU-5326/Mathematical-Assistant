@@ -13,7 +13,7 @@
         --bg-light: radial-gradient(circle at top left, #e0f2fe, #f8fafc, #dbeafe);
         --bg-dark: radial-gradient(circle at bottom right, #0f172a, #1e293b, #0a0e1a);
         --text-light: #1e293b;
-        --text-dark: #f1f5f9;
+        --text-dark: #1e293b;
         --card-light: #ffffffee;
         --card-dark: #1e293bee;
         --accent-blue: #2563eb;
@@ -72,6 +72,10 @@
         margin-bottom: 40px;
         animation: fadeIn 1.5s ease;
       }
+      body.dark h1 {
+      color: #1e293b !important; /* Keeps same light-mode color */
+    }
+
 
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(-20px); }
