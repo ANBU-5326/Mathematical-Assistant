@@ -14,7 +14,7 @@
         --accent-green: #10b981;
       }
 
-      /* 🌈 Base Styling */
+      
       body {
         font-family: "Outfit", sans-serif;
         background: var(--bg-light);
@@ -38,7 +38,7 @@
         margin-bottom: 60px;
       }
 
-      /* 🌟 Floating Count Box */
+    
       .fib-controls {
         display: flex;
         justify-content: center;
@@ -95,7 +95,7 @@
         box-shadow: 0 10px 35px rgba(0,0,0,0.45);
       }
 
-      /* 💎 Card */
+     
       .card {
         background: rgba(255, 255, 255, 0.92);
         border-radius: 24px;
@@ -117,7 +117,7 @@
         box-shadow: 0 30px 80px rgba(37,99,235,0.25);
       }
 
-      /* 📈 Fibonacci Graph */
+    
       #fibContainer img {
         display: block;
         margin: 25px auto;
@@ -149,7 +149,7 @@
         margin-top: 20px;
       }
 
-      /* 🔘 Buttons */
+
       button {
         background: linear-gradient(90deg, var(--accent-green), #059669);
         color: #fff;
@@ -170,7 +170,7 @@
 
       a { text-decoration: none; }
 
-      /* 🌗 Theme Toggle */
+     
       #themeToggle {
         position: fixed;
         top: 18px;
@@ -191,7 +191,7 @@
         box-shadow: 0 10px 25px rgba(37,99,235,0.25);
       }
 
-      /* 📱 Responsive */
+     
       @media (max-width: 640px) {
         h1 { font-size: 2rem; margin-bottom: 50px; }
         .card { padding: 40px; margin-top: 70px; }
@@ -226,7 +226,7 @@
     </div>
 
     <script>
-      // --- Theme Initialization ---
+     
       (function(){
         const body = document.body;
         const toggle = document.getElementById('themeToggle');
@@ -245,7 +245,7 @@
         });
       })();
 
-      // --- Fibonacci Curve Logic ---
+    
       document.getElementById('refresh').addEventListener('click', () => {
         const n = document.getElementById('fibN').value;
         const container = document.getElementById('fibContainer');
